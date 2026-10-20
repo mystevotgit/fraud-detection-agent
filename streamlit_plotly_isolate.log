@@ -1,0 +1,12 @@
+DEBUG:isolate:Attempting plot: histogram
+DEBUG:isolate:Plot succeeded: histogram
+DEBUG:isolate:Attempting plot: roc_pr
+DEBUG:isolate:Plot succeeded: roc_pr
+DEBUG:isolate:Attempting plot: confusion_matrix
+DEBUG:isolate:Plot succeeded: confusion_matrix
+DEBUG:isolate:Attempting plot: histogram
+DEBUG:isolate:Plot succeeded: histogram
+DEBUG:isolate:Attempting plot: roc_pr
+DEBUG:isolate:Plot succeeded: roc_pr
+DEBUG:isolate:Attempting plot: confusion_matrix
+DEBUG:isolate:Plot succeeded: confusion_matrix

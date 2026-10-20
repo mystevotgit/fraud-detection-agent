@@ -1,0 +1,80 @@
+project:
+  name: intelligent-cost-sensitive-fraud-agent
+  random_seed: 582
+  approval_required_before_final_experiments: true
+
+paths:
+  raw_data: data/raw/creditcard.csv
+  processed_dir: data/processed
+  models_dir: artifacts/models
+  metrics_dir: artifacts/metrics
+  figures_dir: artifacts/figures
+  tables_dir: artifacts/tables
+
+data:
+  target: Class
+  amount_column: Amount
+  time_column: Time
+  pca_feature_prefix: V
+  stratified_split:
+    train_size: 0.60
+    validation_size: 0.20
+    test_size: 0.20
+  chronological_split:
+    enabled: true
+    train_size: 0.60
+    validation_size: 0.20
+    test_size: 0.20
+
+costs:
+  false_negative_base: 5.0
+  false_negative_amount_multiplier: 1.0
+  false_block_legitimate: 25.0
+  manual_review: 3.0
+  correct_block_fraud_benefit: 0.0
+  max_review_rate: 0.10
+  review_capacity_penalty: 10000.0
+
+agent:
+  default_threshold: 0.50
+  manual_threshold_grid_size: 101
+  risk_bands:
+    low: 0.05
+    moderate: 0.50
+    high: 0.90
+
+ga:
+  population_size: 40
+  generations: 60
+  mutation_rate: 0.20
+  mutation_scale: 0.08
+  crossover_rate: 0.80
+  tournament_size: 3
+  elitism: 2
+  min_gap: 0.001
+
+models:
+  logistic_regression:
+    enabled: true
+    class_weight: balanced
+    C_values: [0.1, 1.0, 10.0]
+  decision_tree:
+    enabled: true
+    max_depth_values: [4, 8, 12]
+    min_samples_leaf_values: [5, 25, 100]
+  random_forest:
+    enabled: true
+    n_estimators: 150
+    max_depth_values: [8, 12, null]
+    min_samples_leaf_values: [5, 25]
+  linear_svm:
+    enabled: true
+    C_values: [0.1, 1.0]
+  mlp:
+    enabled: true
+    hidden_layer_sizes: [[64], [64, 32]]
+    alpha_values: [0.0001, 0.001]
+  isolation_forest:
+    enabled: true
+    contamination_values: [0.001, 0.002, 0.005]
+
